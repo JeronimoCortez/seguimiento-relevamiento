@@ -1,65 +1,157 @@
-import Image from "next/image";
+import Link from 'next/link';
+
+const steps = [
+  {
+    title: 'Acceso a los datos',
+    description:
+      'Cada institución tiene identificadas las familias que deberán ser recitadas a partir de los registros del operativo. En caso de necesitar la información que se cargó en el sistema, podrán acceder a la misma ingresando el correo electrónico de la persona responsable de la carga.',
+    icon: (
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+        />
+      </svg>
+    ),
+    color: 'blue',
+  },
+  {
+    title: 'Hasta viernes 3 de julio de 2026.',
+    description:
+      'Contactar a las familias que estuvieron ausentes durante el relevamiento inicial.',
+    icon: (
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+        />
+      </svg>
+    ),
+    color: 'violet',
+  },
+  {
+    title: 'Post receso invernal',
+    description:
+      'Realizar seguimiento de los contactos efectuados durante la etapa anterior.',
+    icon: (
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+        />
+      </svg>
+    ),
+    color: 'emerald',
+  },
+];
+
+const stepColors: Record<string, string> = {
+  blue: 'bg-blue-50 border-blue-200',
+  violet: 'bg-violet-50 border-violet-200',
+  emerald: 'bg-emerald-50 border-emerald-200',
+};
+
+const stepIconBg: Record<string, string> = {
+  blue: 'bg-blue-100 text-blue-600',
+  violet: 'bg-violet-100 text-violet-600',
+  emerald: 'bg-emerald-100 text-emerald-600',
+};
+
+const stepBadge: Record<string, string> = {
+  blue: 'text-blue-600',
+  violet: 'text-violet-600',
+  emerald: 'text-emerald-600',
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-gray-50">
+      {/* Header institucional */}
+      <div className="bg-blue-900 text-white px-4 py-12">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-blue-300">
+            Dirección General de Escuelas · Mendoza
+          </p>
+          <h1 className="mb-4 text-2xl font-bold leading-tight md:text-3xl">
+            Operativo Territorial de Responsabilidad Parental, Acuerdos de Convivencia y Seguridad Integral (MEMOI-2026-15-GDEMZA-DGE)
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-base text-blue-200">
+            El seguimiento tiene por objetivo garantizar la continuidad de las trayectorias educativas de los estudiantes cuyas familias no concurrieron a la citación. Para ello se deberán identificar las situaciones de riesgo o vulnerabilidad asociadas a la ausencia y fortalecer el vínculo entre las familias y las instituciones educativas mediante una intervención personalizada y sostenida. En este sentido, resulta necesario completar la notificación fehaciente del cien por ciento de las familias.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </div>
+
+      {/* Etapas del seguimiento */}
+      <div className="mx-auto max-w-3xl px-4 py-12">
+        <h2 className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-gray-600">
+          Etapas del seguimiento
+        </h2>
+
+        <div className="space-y-4">
+          {steps.map((step, i) => {
+            const content = (
+              <div
+                className={`flex items-start gap-5 rounded-xl border-2 p-6 transition-all duration-150 hover:shadow-md ${stepColors[step.color]}`}
+              >
+                <div
+                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${stepIconBg[step.color]}`}
+                >
+                  {step.icon}
+                </div>
+                <div className="flex-1">
+                  <span
+                    className={`mb-1 inline-block text-xs font-semibold uppercase tracking-wider ${stepBadge[step.color]}`}
+                  >
+                    Etapa {i + 1}
+                  </span>
+                  <h3 className="text-base font-semibold text-gray-800">
+                    {step.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-gray-500">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            );
+            if (i === 0) {
+              return (
+                <Link key={i} href="/seguimiento/acceso-a-datos" className="block">
+                  {content}
+                </Link>
+              );
+            }
+            if (i === 1) {
+              return (
+                <Link key={i} href="/seguimiento/formulario" className="block">
+                  {content}
+                </Link>
+              );
+            }
+            return <div key={i}>{content}</div>;
+          })}
         </div>
-      </main>
+      </div>
     </div>
   );
 }

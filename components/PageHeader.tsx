@@ -1,0 +1,17 @@
+interface PageHeaderProps {
+  title: string;
+  description?: string;
+}
+
+export function PageHeader({ title, description }: PageHeaderProps) {
+  return (
+    <div className="mb-8 text-center">
+      <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
+      {description && (
+        <p className="mt-2 text-sm leading-relaxed text-gray-500">
+          {description}
+        </p>
+      )}
+    </div>
+  );
+}

@@ -45,7 +45,8 @@ export async function POST(request: NextRequest) {
 
     const existingEmails = (existing.data.values ?? [])
       .slice(1)
-      .map((row) => (row[0] ?? '').toString().trim().toLowerCase());
+      .flatMap((row) => (row[0] ?? '').toString().trim().toLowerCase())
+      .filter(Boolean);
 
     if (existingEmails.includes(body.emailResponsable.trim().toLowerCase())) {
       return NextResponse.json<ApiSubmitResponse>(
@@ -69,6 +70,7 @@ export async function POST(request: NextRequest) {
       spreadsheetId: SPREADSHEET_ID,
       range: `${SHEET_DESTINO}!A:H`,
       valueInputOption: 'RAW',
+      insertDataOption: 'INSERT_ROWS',
       requestBody: { values },
     });
 

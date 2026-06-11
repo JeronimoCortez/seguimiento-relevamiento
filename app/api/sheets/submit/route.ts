@@ -38,6 +38,22 @@ export async function POST(request: NextRequest) {
     const auth = getAuth();
     const sheets = google.sheets({ version: 'v4', auth });
 
+    const existing = await sheets.spreadsheets.values.get({
+      spreadsheetId: SPREADSHEET_ID,
+      range: `${SHEET_DESTINO}!C:C`,
+    });
+
+    const existingEmails = (existing.data.values ?? [])
+      .slice(1)
+      .map((row) => (row[0] ?? '').toString().trim().toLowerCase());
+
+    if (existingEmails.includes(body.emailResponsable.trim().toLowerCase())) {
+      return NextResponse.json<ApiSubmitResponse>(
+        { ok: false, error: 'El correo electrónico ya fue registrado previamente' },
+        { status: 409 }
+      );
+    }
+
     const values = [[
       new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Mendoza' }),
       body.nombreResponsable,

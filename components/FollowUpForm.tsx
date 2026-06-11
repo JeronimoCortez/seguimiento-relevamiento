@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import type { FollowUpFormData, FormErrors } from "@/types";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
@@ -66,11 +67,11 @@ function validate(data: FollowUpFormData): FormErrors {
 }
 
 export function FollowUpForm({ onSubmit }: FollowUpFormProps) {
+  const router = useRouter();
   const [data, setData] = useState<FollowUpFormData>(initialData);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const set =
     (field: keyof FollowUpFormData) =>
@@ -84,7 +85,6 @@ export function FollowUpForm({ onSubmit }: FollowUpFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
-    setSubmitSuccess(false);
 
     const validation = validate(data);
     if (Object.keys(validation).length > 0) {
@@ -95,8 +95,7 @@ export function FollowUpForm({ onSubmit }: FollowUpFormProps) {
     setIsSubmitting(true);
     try {
       await onSubmit(data);
-      setSubmitSuccess(true);
-      setData(initialData);
+      router.push("/seguimiento/formulario/exito");
     } catch (err) {
       setSubmitError(
         err instanceof Error ? err.message : "Error al enviar el formulario",
@@ -188,15 +187,6 @@ export function FollowUpForm({ onSubmit }: FollowUpFormProps) {
             role="alert"
           >
             {submitError}
-          </div>
-        )}
-
-        {submitSuccess && (
-          <div
-            className="rounded-xl border-2 border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700"
-            role="status"
-          >
-            Datos guardados correctamente.
           </div>
         )}
 

@@ -33,3 +33,17 @@ export async function submitFollowUp(
     throw new Error(body.error ?? 'Error al guardar los datos');
   }
 }
+
+export async function submitFollowUpPostReceso(
+  data: FollowUpFormData
+): Promise<void> {
+  const res = await fetch('/api/sheets/submit-post-receso', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  const body: ApiSubmitResponse = await res.json();
+  if (!body.ok) {
+    throw new Error(body.error ?? 'Error al guardar los datos');
+  }
+}

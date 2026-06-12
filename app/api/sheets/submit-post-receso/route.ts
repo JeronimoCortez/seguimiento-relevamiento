@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import type { FollowUpFormData, ApiSubmitResponse } from '@/types';
 
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID_SEGUIMIENTO!;
-const SHEET_DESTINO = 'Pre-receso';
+const SHEET_DESTINO = 'Post-receso';
 const HEADERS = [
   'Marca temporal',
   'Nombre persona responsable del seguimiento',
@@ -92,7 +92,7 @@ function validate(data: FollowUpFormData): string | null {
     return 'El correo es obligatorio';
   }
   if (!data.telefonoResponsable?.trim()) {
-    return 'El número es obligatorio';
+    return 'El teléfono es obligatorio';
   }
   if (!data.cantidadFamiliasSeguimiento?.trim()) {
     return 'La cantidad de familias es obligatoria';

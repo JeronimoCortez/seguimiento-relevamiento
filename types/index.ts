@@ -16,6 +16,13 @@ export interface PrimariaMatriculas {
   matricula5: string;
   matricula6: string;
   matricula7: string;
+  ausentes1: string;
+  ausentes2: string;
+  ausentes3: string;
+  ausentes4: string;
+  ausentes5: string;
+  ausentes6: string;
+  ausentes7: string;
   familiasAusentes: string;
 }
 
@@ -26,6 +33,12 @@ export interface SecundariaMatriculas {
   matricula4: string;
   matricula5: string;
   matricula6: string;
+  ausentes1: string;
+  ausentes2: string;
+  ausentes3: string;
+  ausentes4: string;
+  ausentes5: string;
+  ausentes6: string;
   familiasAusentes: string;
 }
 
@@ -33,11 +46,15 @@ export interface AdultosMatriculas {
   matricula1: string;
   matricula2: string;
   matricula3: string;
+  ausentes1: string;
+  ausentes2: string;
+  ausentes3: string;
   familiasAusentes: string;
 }
 
 export interface EducacionEspecialMatriculas {
   matricula1: string;
+  ausentes1: string;
   familiasAusentes: string;
 }
 

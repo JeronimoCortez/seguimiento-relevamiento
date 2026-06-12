@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 
 interface FollowUpFormProps {
   onSubmit: (data: FollowUpFormData) => Promise<void>;
+  redirectTo?: string;
 }
 
 const initialData: FollowUpFormData = {
@@ -66,7 +67,7 @@ function validate(data: FollowUpFormData): FormErrors {
   return errors;
 }
 
-export function FollowUpForm({ onSubmit }: FollowUpFormProps) {
+export function FollowUpForm({ onSubmit, redirectTo = '/seguimiento/formulario/exito' }: FollowUpFormProps) {
   const router = useRouter();
   const [data, setData] = useState<FollowUpFormData>(initialData);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -95,7 +96,7 @@ export function FollowUpForm({ onSubmit }: FollowUpFormProps) {
     setIsSubmitting(true);
     try {
       await onSubmit(data);
-      router.push("/seguimiento/formulario/exito");
+      router.push(redirectTo);
     } catch (err) {
       setSubmitError(
         err instanceof Error ? err.message : "Error al enviar el formulario",
@@ -128,12 +129,12 @@ export function FollowUpForm({ onSubmit }: FollowUpFormProps) {
             placeholder="correo@ejemplo.com"
           />
           <Input
-            label="Número persona responsable del seguimiento"
+            label="Teléfono persona responsable del seguimiento"
             type="tel"
             value={data.telefonoResponsable}
             onChange={set("telefonoResponsable")}
             error={errors.telefonoResponsable}
-            placeholder="Ingrese el número"
+            placeholder="Ingrese el teléfono"
           />
         </div>
 

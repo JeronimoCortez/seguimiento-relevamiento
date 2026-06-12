@@ -148,6 +148,13 @@ export default function Home() {
                 </Link>
               );
             }
+            if (i === 2) {
+              return (
+                <Link key={i} href="/seguimiento/formulario-post-receso" className="block">
+                  {content}
+                </Link>
+              );
+            }
             return <div key={i}>{content}</div>;
           })}
         </div>

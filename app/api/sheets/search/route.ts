@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
 
     const headers = rows[0];
     const emailColIndex = headers.findIndex((h) =>
-      h.toLowerCase().includes('dirección de correo electrónico')
+      h.toLowerCase().includes('persona responsable de la carga de datos ante situaciones emergentes: correo electrónico')
     );
     const nombreColIndex = headers.findIndex((h) =>
       h.toLowerCase().includes('nombre del establecimiento')
@@ -135,6 +135,14 @@ function extractMatriculas(
     return idx !== -1 ? (row[idx] ?? '') : '';
   };
 
+  const getAusentes = (gradeLabel: string): string => {
+    const idx = headers.findIndex((h) => {
+      const lower = h.toLowerCase();
+      return lower.includes('familias ausentes') && new RegExp(`\\b${gradeLabel}\\b`).test(lower);
+    });
+    return idx !== -1 ? (row[idx] ?? '') : '';
+  };
+
   if (nivel === 'primaria') {
     return {
       matricula1: getValue('1'),
@@ -144,6 +152,13 @@ function extractMatriculas(
       matricula5: getValue('5'),
       matricula6: getValue('6'),
       matricula7: getValue('7'),
+      ausentes1: getAusentes('1'),
+      ausentes2: getAusentes('2'),
+      ausentes3: getAusentes('3'),
+      ausentes4: getAusentes('4'),
+      ausentes5: getAusentes('5'),
+      ausentes6: getAusentes('6'),
+      ausentes7: getAusentes('7'),
       familiasAusentes: getFamiliasAusentes(headers, row),
     };
   }
@@ -153,6 +168,9 @@ function extractMatriculas(
       matricula1: getValue('1'),
       matricula2: getValue('2'),
       matricula3: getValue('3'),
+      ausentes1: getAusentes('1'),
+      ausentes2: getAusentes('2'),
+      ausentes3: getAusentes('3'),
       familiasAusentes: getFamiliasAusentes(headers, row),
     };
   }
@@ -160,6 +178,7 @@ function extractMatriculas(
   if (nivel === 'educacion-especial') {
     return {
       matricula1: getValue('1'),
+      ausentes1: getAusentes('1'),
       familiasAusentes: getFamiliasAusentes(headers, row),
     };
   }
@@ -171,6 +190,12 @@ function extractMatriculas(
     matricula4: getValue('4'),
     matricula5: getValue('5'),
     matricula6: getValue('6'),
+    ausentes1: getAusentes('1'),
+    ausentes2: getAusentes('2'),
+    ausentes3: getAusentes('3'),
+    ausentes4: getAusentes('4'),
+    ausentes5: getAusentes('5'),
+    ausentes6: getAusentes('6'),
     familiasAusentes: getFamiliasAusentes(headers, row),
   };
 }

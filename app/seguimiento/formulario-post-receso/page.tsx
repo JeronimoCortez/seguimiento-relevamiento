@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from 'react';
 import { FollowUpForm } from '@/components/FollowUpForm';
-import { submitFollowUp } from '@/services/sheet.service';
+import { submitFollowUpPostReceso } from '@/services/sheet.service';
 
-const CIERRE = new Date('2026-07-03T23:59:00-03:00');
+const HABILITAR_APARTIR = new Date('2026-07-20T00:00:00-03:00');
 
-export default function FormularioPage() {
+export default function FormularioPostRecesoPage() {
   const [habilitado, setHabilitado] = useState(false);
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    setHabilitado(new Date() < CIERRE);
+    setHabilitado(new Date() >= HABILITAR_APARTIR);
     setCargando(false);
   }, []);
 
@@ -36,7 +36,7 @@ export default function FormularioPage() {
                 Dirección General de Escuelas · Mendoza
               </p>
               <h1 className="mb-4 text-2xl font-bold leading-tight md:text-3xl">
-                Formulario de seguimiento
+                Formulario de seguimiento - Post receso invernal
               </h1>
               <p className="text-base text-blue-200">
                 Complete el formulario con los datos del seguimiento realizado a las
@@ -48,11 +48,11 @@ export default function FormularioPage() {
         <div className="mx-auto max-w-xl px-4 py-16 text-center">
           <div className="rounded-xl border-2 border-amber-200 bg-amber-50 p-8 shadow-sm">
             <h2 className="mb-2 text-lg font-semibold text-amber-800">
-              Formulario cerrado
+              Formulario no disponible
             </h2>
             <p className="text-sm text-amber-700">
-              El período de carga del formulario Pre receso invernal finalizó el
-              3 de julio de 2026.
+              El formulario de seguimiento Post receso invernal estará disponible
+              a partir del 20 de julio de 2026.
             </p>
           </div>
         </div>
@@ -62,7 +62,6 @@ export default function FormularioPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header institucional */}
       <div className="bg-blue-900 text-white px-4 py-12">
         <div className="mx-auto max-w-3xl">
           <a
@@ -91,10 +90,13 @@ export default function FormularioPage() {
 
       <div className="mx-auto max-w-3xl px-4 py-10">
         <h2 className="mb-5 text-center text-sm font-medium uppercase tracking-wider text-gray-600">
-          Seguimiento - Pre receso invernal
+          Seguimiento - Post receso invernal
         </h2>
 
-        <FollowUpForm onSubmit={submitFollowUp} />
+        <FollowUpForm
+          onSubmit={submitFollowUpPostReceso}
+          redirectTo="/seguimiento/formulario-post-receso/exito"
+        />
       </div>
     </div>
   );

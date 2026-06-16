@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FollowUpForm } from '@/components/FollowUpForm';
-import { submitFollowUp } from '@/services/sheet.service';
+import { NivelSelector } from '@/components/NivelSelector';
 
 const CIERRE = new Date('2026-07-03T23:59:00-03:00');
 
@@ -89,13 +88,7 @@ export default function FormularioPage() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-3xl px-4 py-10">
-        <h2 className="mb-5 text-center text-sm font-medium uppercase tracking-wider text-gray-600">
-          Seguimiento - Pre receso invernal
-        </h2>
-
-        <FollowUpForm onSubmit={submitFollowUp} />
-      </div>
+      <NivelSelector basePath="/seguimiento/formulario" />
     </div>
   );
 }

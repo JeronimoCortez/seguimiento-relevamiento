@@ -68,7 +68,36 @@ export interface FollowUpFormData {
   cantidadFirmaronActa: string;
   cantidadNoContactadas: string;
   descripcionAcciones: string;
+  tipoGestion: string;
+  modalidad: string;
+  'sedeSupervisión': string;
+  departamento: string;
+  escuela: string;
+  nombreEstablecimiento: string;
+  correoElectronico: string;
+  nivel: string;
 }
+
+export const DEPARTAMENTOS_MENDOZA = [
+  'Capital',
+  'General Alvear',
+  'Godoy Cruz',
+  'Guaymallén',
+  'Junín',
+  'La Paz',
+  'Las Heras',
+  'Lavalle',
+  'Luján de Cuyo',
+  'Maipú',
+  'Malargüe',
+  'Rivadavia',
+  'San Carlos',
+  'San Martín',
+  'San Rafael',
+  'Santa Rosa',
+  'Tunuyán',
+  'Tupungato',
+] as const;
 
 export type SearchState = 'idle' | 'loading' | 'success' | 'error';
 

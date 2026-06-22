@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Seguimiento de familias ausentes",
-  description: "Sistema de seguimiento de relevamiento de familias ausentes",
+  title: "Seguimiento - Control de Responsabilidad Parental",
+  description: "Sistema de seguimiento de Control de Responsabilidad parental",
 };
 
 export default function RootLayout({
